@@ -37,16 +37,16 @@ class LocateProgramAndFiles:
         used_ports = {conn.laddr.port for conn in psutil.net_connections()}
         free_ports = [port for port in range(start, end) if port not in used_ports]
         while True:
-            data_port = 20
-            if data_port in free_ports:
-                return data_port
+            command_port = 21
+            if command_port in free_ports:
+                return command_port
             else:
-                data_port += 2
+                command_port += 2
         
     def get_location(self):
         ip_addr = self.get_access_ip()
         if ip_addr is None:
-            print("没有WLAN连接。")
+            print("WLAN disconnected.")
             sys.exit()
         return [self.get_access_ip(), str(self.get_avbl_port())]
         
