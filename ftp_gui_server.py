@@ -36,8 +36,8 @@ class LocateProgramAndFiles:
     def get_avbl_port(self, start=0, end=65536):
         used_ports = {conn.laddr.port for conn in psutil.net_connections()}
         free_ports = [port for port in range(start, end) if port not in used_ports]
+        command_port = 21
         while True:
-            command_port = 21
             if command_port in free_ports:
                 return command_port
             else:
@@ -52,7 +52,7 @@ class LocateProgramAndFiles:
         
 
 class SimpleFTPServer:
-    def __init__(self, host="127.0.0.1", port=2121, user="user", password="12345", directory='.'):
+    def __init__(self, host="127.0.0.1", port=21, user="user", password="12345", directory='.'):
         self.host = host
         self.port = port
         self.user = user
@@ -63,8 +63,10 @@ class SimpleFTPServer:
         authorizer = DummyAuthorizer()
         authorizer.add_user(self.user, self.password, self.directory, perm='elradfmw')
         handler = FTPHandler
+        handler.passive_ports = range(60000, 65535)
+        handler.masquerade_address = self.host
         handler.authorizer = authorizer
-        self.server = FTPServer((self.host, self.port), handler)
+        self.server = FTPServer(('0.0.0.0', self.port), handler)
         self.server.serve_forever()
 
     def stop(self):
@@ -145,7 +147,11 @@ def main(location):
 
 if __name__ == "__main__":
     path_of_current_folder = os.getcwd()
-    path_of_file_storage_folder = path_of_current_folder + r'/Files'
+    if not (path_of_current_folder.endswith('/') or \
+        path_of_current_folder.endswith('\\')):
+        path_of_file_storage_folder = path_of_current_folder + '/Files'
+    else:
+        path_of_file_storage_folder = path_of_current_folder + 'Files'
     os.makedirs(path_of_file_storage_folder, exist_ok=True)
     
     locate_in_internet_and_files = LocateProgramAndFiles()
