@@ -39,7 +39,10 @@ ___
 
 VS Code Ctrl+\\  
 Markdown All in One Shift+Ctrl+V
+<<<<<<< HEAD
 
 ———
 
 Notice: The release has no practical abnormalities.
+=======
+>>>>>>> 7718534c0a684f8f9a5dce0c4c8c630159001e3b
