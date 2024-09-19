@@ -1,4 +1,4 @@
-<h1 align="center"> FTP server side program 🐞</h1>
+<h1 align="center"> FTP server side program 🐞 </h1>
 
 <p align="center">
 <img alt="Static Badge" src="https://img.shields.io/badge/dive_into-shields.io-blue?link=https%3A%2F%2Fshields.io%2Fbadges">
@@ -34,3 +34,12 @@ In violation of this:
 1. Can trigger breakpoint resume.
 2. May cause server side connection failed.
 3. Way to solve: 1. Restart server side operate system. 2. Restart client side operate system.
+
+___
+
+VS Code Ctrl+\\  
+Markdown All in One Shift+Ctrl+V
+
+———
+
+Notice: The release has no practical abnormalities.
